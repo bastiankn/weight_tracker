@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "weight-tracker"
+version = "0.1.0"
+description = ""
+authors = ["Bastian"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.4"
+Django = "^5.0.6"
+streamlit = "^1.36.0"
+pandas = "^2.2.2"
+plotly = "^5.22.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -13,6 +13,7 @@ streamlit = "^1.36.0"
 pandas = "^2.2.2"
 plotly = "^5.22.0"
 psycopg2 = "^2.9.9"
+django-environ = "^0.11.2"
 
 
 [build-system]

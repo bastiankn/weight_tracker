@@ -12,6 +12,7 @@ Django = "^5.0.6"
 streamlit = "^1.36.0"
 pandas = "^2.2.2"
 plotly = "^5.22.0"
+psycopg2 = "^2.9.9"
 
 
 [build-system]

@@ -1,0 +1,12 @@
+server {
+    listen      80;
+    server_name 192.168.178.100;  
+ 
+location /static {
+        root /home/Bastian/weight_tracker/static;
+    }
+location / {
+        proxy_pass http://192.168.178.100:8000;
+    }
+}
+# tst

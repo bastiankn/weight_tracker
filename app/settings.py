@@ -83,11 +83,11 @@ if ENVIRONMENT == 'production':
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": env('DATABASE_NAME'),
-            "USER": env('DATABASE_USER'),
-            "PASSWORD": env('DATABASE_PASSWORD'),
-            "HOST": env('DATABASE_HOST'),
-            "PORT": env('DATABASE_PORT'),
+            "NAME": 'tracker',#env('DATABASE_NAME'),
+            "USER": 'bastian',#env('DATABASE_USER'),
+            "PASSWORD": 'htrnge-dqll2',#env('DATABASE_PASSWORD'),
+            "HOST": '192.168.178.100',#env('DATABASE_HOST'),
+            "PORT": '5432',#env('DATABASE_PORT'),
         }
     }
 else:

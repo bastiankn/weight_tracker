@@ -1,42 +1,102 @@
 {% extends "base.html" %}
+
 {% block title %}
-Login
+Workout Plan
 {% endblock %}
-{% block nl_content %}
 
-<div class="tab-content">
-    <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        <form method="post">
-            {% csrf_token %}
-            <!-- Username input -->
-            <div class="form-outline mb-4">
-                <input type="text" id="loginName" class="form-control" name="username" required />
-                <label class="form-label" for="loginName">Username</label>
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-                <input type="password" id="loginPassword" class="form-control" name="password" required />
-                <label class="form-label" for="loginPassword">Password</label>
-            </div>
-
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-dark btn-block mb-4">Login</button>
-
-            <!-- Error handling -->
-            {% if messages %}
-            <div class="alert alert-danger">
-                {% for message in messages %}
-                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Workout Plan</h1>
+    <ul class="nav nav-tabs" id="workoutTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="chest-tab" data-toggle="tab" href="#chest" role="tab" aria-controls="chest" aria-selected="false">Chest</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="back-tab" data-toggle="tab" href="#back" role="tab" aria-controls="back" aria-selected="false">Back</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="arms-tab" data-toggle="tab" href="#arms" role="tab" aria-controls="arms" aria-selected="false">Shoulders & Arms</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="legs-tab" data-toggle="tab" href="#legs" role="tab" aria-controls="legs" aria-selected="false">Legs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="accessories-tab" data-toggle="tab" href="#accessories" role="tab" aria-controls="accessories" aria-selected="false">Accessories</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="workoutTabContent">
+        <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for item in workout_plan.General %}
+                        <li class="list-group-item">{{ item }}</li>
                     {% endfor %}
+                </ul>
             </div>
-            {% endif %}
-
-            <!-- Register link -->
-            <div class="text-center">
-                <p>You are an admin? <a href="admin" class="nav-link text-dark" id="tab-register">Admin</a></p>
+        </div>
+        <div class="tab-pane fade" id="chest" role="tabpanel" aria-labelledby="chest-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for exercise in workout_plan.Chest %}
+                        <li class="list-group-item">
+                            <h5>{{ exercise.exercise }}</h5>
+                            <p>{{ exercise.description|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-        </form>
+        </div>
+        <div class="tab-pane fade" id="back" role="tabpanel" aria-labelledby="back-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for exercise in workout_plan.Back %}
+                        <li class="list-group-item">
+                            <h5>{{ exercise.exercise }}</h5>
+                            <p>{{ exercise.description|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="arms" role="tabpanel" aria-labelledby="arms-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for exercise in workout_plan.Arms %}
+                        <li class="list-group-item">
+                            <h5>{{ exercise.exercise }}</h5>
+                            <p>{{ exercise.description|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="legs" role="tabpanel" aria-labelledby="legs-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for exercise in workout_plan.Legs %}
+                        <li class="list-group-item">
+                            <h5>{{ exercise.exercise }}</h5>
+                            <p>{{ exercise.description|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="accessories" role="tabpanel" aria-labelledby="accessories-tab">
+            <div class="mt-3">
+                <ul class="list-group">
+                    {% for exercise in workout_plan.Accessories %}
+                        <li class="list-group-item">
+                            <h5>{{ exercise.exercise }}</h5>
+                            <p>{{ exercise.description|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 def plan(request):
-    return HttpResponse("Workout Plan")
+    return render(request, "workoutplan.html")

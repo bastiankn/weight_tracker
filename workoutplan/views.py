@@ -3,6 +3,7 @@ from django.shortcuts import render
 def plan(request):
     workout_plan = {
         "General": [
+            "Nur Fleisch macht Fleisch"
             "Hart, schwer und richtig",
             "Wer regelkonform trainiert, sieht halt auch regelkonform aus",
             "8-12 Wochen 3-5 Übungen, 3-5 Sets, 3-5 Wiederholungen",

@@ -33,7 +33,7 @@ def login_view(request):
                 user = None 
         if user is not None:
             login(request, user)
-            return redirect('workoutplan')
+            return redirect('plan')
         else:
             messages.error(request, 'Invalid username or password.')
             return render(request, 'login.html', {
@@ -61,7 +61,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, "Activation link is invalid!")
 
-    return redirect('workoutplan')
+    return redirect('plan')
 
 
 # Sending Email

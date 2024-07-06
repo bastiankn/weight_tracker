@@ -77,7 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 # Read the environment variable to determine the environment
-ENVIRONMENT = os.getenv('DJANGO_ENV', 'development')
+ENVIRONMENT = os.getenv('DJANGO_ENV', 'production') #development
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

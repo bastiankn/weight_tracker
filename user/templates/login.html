@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
+{% block content %}
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+        <form method="post">
+            {% csrf_token %}
+            <!-- Username input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="loginName" class="form-control" name="username" required />
+                <label class="form-label" for="loginName">Username</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="loginPassword" class="form-control" name="password" required />
+                <label class="form-label" for="loginPassword">Password</label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-dark btn-block mb-4">Login</button>
+
+            <!-- Error handling -->
+            {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Register link -->
+            <div class="text-center">
+                <p>You are an admin? <a href="admin" class="nav-link text-dark" id="tab-register">Admin</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

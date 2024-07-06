@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    "user",
     "workoutplan",
 ]
 
@@ -148,3 +149,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Domain registration for CSRF tokens
 CSRF_TRUSTED_ORIGINS = [env('CSRF_TRUSTED_ORIGINS')]
+
+# Activation Mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = 'assetsenseactivation@gmail.com'
+EMAIL_HOST_PASSWORD = 'wcsq swnt hqvw byos'
+EMAIL_PORT = 587 
+EMAIL_USE_TLS = True
+PASSWORD_RESET_TIMER = 14400

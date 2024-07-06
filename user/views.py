@@ -69,7 +69,7 @@ def activateEmail(request, user, to_email):
     mail_subject = "Activate your user account."
     message = render_to_string("template_activate_account.html", {
         'user': user.username,
-        'domain': 'http://192.168.178.100/',
+        'domain': '192.168.178.100/',
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
         "protocol": 'http' #if request.is_secure() else 'http'

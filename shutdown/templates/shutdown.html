@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Shutdown
+{% endblock %}
+
+{% block content %}
+
+    <h1>Shutdown Raspberry Pi</h1>
+    <form action="/shutdown/" method="post">
+        {% csrf_token %}
+        <button type="submit">Shutdown</button>
+    </form>
+
+{% endblock %}

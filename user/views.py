@@ -18,6 +18,7 @@ def check_user_not_authenticated(user):
     return not user.is_authenticated
 
 # Login
+@user_passes_test(check_user_not_authenticated, login_url='/', redirect_field_name=None)
 def login_view(request):
     if request.method == 'POST':
         identifier = request.POST['username'] 
@@ -83,7 +84,7 @@ def activateEmail(request, user, to_email):
 
 
 # Register
-@user_passes_test(check_user_not_authenticated, login_url='/workoutplan', redirect_field_name=None)
+@user_passes_test(check_user_not_authenticated, login_url='/', redirect_field_name=None)
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

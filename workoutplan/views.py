@@ -1,9 +1,15 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test
 
+# User Authenticated
+def check_user_not_authenticated(user):
+    return user.is_authenticated
+
+@user_passes_test(check_user_not_authenticated, login_url='/login', redirect_field_name=None)
 def plan(request):
     workout_plan = {
         "General": [
-            "Nur Fleisch macht Fleisch"
+            "Nur Fleisch macht Fleisch",
             "Hart, schwer und richtig",
             "Wer regelkonform trainiert, sieht halt auch regelkonform aus",
             "8-12 Wochen 3-5 Übungen, 3-5 Sets, 3-5 Wiederholungen",

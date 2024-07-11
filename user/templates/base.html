@@ -49,6 +49,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Workoutplan</a>
                 </li>
+                {% if user.is_authenticated and user.is_superuser %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shutdown">Shutdown</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

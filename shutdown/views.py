@@ -7,8 +7,13 @@ import subprocess
 def shutdown(request):
     if request.method == 'POST':
         try:
-            subprocess.run(["sudo", "/sbin/shutdown", "-h", "now"], check=True)
-            return HttpResponse('Shutting down...')
+            result = subprocess.run(
+                ["sudo", "/sbin/shutdown", "-h", "now"],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            return HttpResponse(f'Shutdown command issued. Output: {result.stdout}')
         except subprocess.CalledProcessError as e:
             return HttpResponse(f'Failed to issue shutdown command: {e}', status=500)
     return HttpResponse('Invalid request method.', status=405)

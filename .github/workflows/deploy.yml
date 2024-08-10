@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - prod
   pull_request:
     branches:
       - main
+      - prod
 
 jobs:
   deploy:
@@ -18,4 +20,15 @@ jobs:
 
     - name: Git Pull on Local Server
       run: |
-        cd /home/Bastian/weight_tracker && git pull origin main
+        cd /home/Bastian/weight_tracker || exit
+        echo "Current branch: ${{ github.ref }}"
+        if [ "${{ github.ref }}" == "refs/heads/prod" ]; then
+          echo "Pulling latest changes from 'prod' branch."
+          git pull origin prod
+        elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "Pulling latest changes from 'main' branch."
+          git pull origin main
+        else
+          echo "No action required for this branch."
+        fi
+

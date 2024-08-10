@@ -13,7 +13,7 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 
 
-# User Authenticated  
+# User Authenticated     
 def check_user_not_authenticated(user):
     return not user.is_authenticated
 

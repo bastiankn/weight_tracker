@@ -9,7 +9,6 @@ on:
     branches:
       - main
       - prod
-
 jobs:
   deploy:
     runs-on: self-hosted  
@@ -18,17 +17,53 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Python environment
+      run: |
+        echo "Setting up Python environment"
+        poetry install
+
     - name: Git Pull on Local Server
       run: |
-        cd /home/Bastian/weight_tracker || exit
-        echo "Current branch: ${{ github.ref }}"
+        cd /home/Bastian/weight_tracker
         if [ "${{ github.ref }}" == "refs/heads/prod" ]; then
-          echo "Pulling latest changes from 'prod' branch."
-          git pull origin prod
+          echo "Pulling latest changes from prod"
+          git pull
         elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          echo "Pulling latest changes from 'main' branch."
+          echo "Pulling latest changes from main"
           git pull origin main
         else
           echo "No action required for this branch."
         fi
 
+    - name: Run Django Migrations
+      run: |
+        echo "Running Django migrations"
+        cd /home/Bastian/weight_tracker
+        poetry run python manage.py makemigrations
+        poetry run python manage.py migrate
+
+    - name: Collect Static Files
+      run: |
+        echo "Collecting static files"
+        cd /home/Bastian/weight_tracker
+        poetry run python manage.py collectstatic --noinput
+
+    - name: Restart Gunicorn Service
+      run: |
+        echo "Restarting Gunicorn service"
+        sudo systemctl restart gunicorn
+
+    - name: Restart Nginx Service
+      run: |
+        echo "Restarting Nginx service"
+        sudo systemctl restart nginx
+
+    - name: Notify Deployment
+      run: |
+        echo "Sending notification about deployment"
+        # You can add a notification command here, e.g., send an email or post to a Slack channel
+
+    - name: Clean Up
+      run: |
+        echo "Cleaning up temporary files"
+        # Add commands to clean up temporary files or artifacts if needed

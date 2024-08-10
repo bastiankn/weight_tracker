@@ -50,13 +50,11 @@ jobs:
 
     - name: Restart Gunicorn Service
       run: |
-        echo "Restarting Gunicorn service"
-        sudo systemctl restart gunicorn
-
+        echo "${{ secrets.ADMIN_PASSWORD }}" | sudo -S systemctl restart gunicorn
+      
     - name: Restart Nginx Service
       run: |
-        echo "Restarting Nginx service"
-        sudo systemctl restart nginx
+        echo "${{ secrets.ADMIN_PASSWORD }}" | sudo -S systemctl restart nginx
 
     - name: Notify Deployment
       run: |

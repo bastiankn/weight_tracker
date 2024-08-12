@@ -17,11 +17,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python environment
-      run: |
-        echo "Setting up Python environment"
-        poetry install
-
     - name: Git Pull on Local Server
       run: |
         cd /home/Bastian/weight_tracker
@@ -34,6 +29,13 @@ jobs:
         else
           echo "No action required for this branch."
         fi
+
+    - name: Set up Python environment
+      run: |
+        echo "Checking if Poetry is installed"
+        poetry --version
+        echo "Setting up Python environment"
+        poetry install
 
     - name: Run Django Migrations
       run: |

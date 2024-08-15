@@ -1,11 +1,7 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
-<<<<<<< HEAD
 import subprocess
 import os
-=======
-import subprocess  
->>>>>>> 3e69586bc0e876d16b553c09480cee63fc95c833
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

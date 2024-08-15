@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+      - prod
   pull_request:
     branches:
       - main
-
+      - prod
 jobs:
   deploy:
     runs-on: self-hosted  
@@ -18,4 +19,51 @@ jobs:
 
     - name: Git Pull on Local Server
       run: |
-        cd /home/Bastian/weight_tracker && git pull origin main
+        cd /home/Bastian/weight_tracker
+        if [ "${{ github.ref }}" == "refs/heads/prod" ]; then
+          echo "Pulling latest changes from prod"
+          git pull
+        elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "Pulling latest changes from main"
+          git pull origin main
+        else
+          echo "No action required for this branch."
+        fi
+
+    - name: Set up Python environment
+      run: |
+        echo "Checking if Poetry is installed"
+        poetry --version
+        echo "Setting up Python environment"
+        poetry install
+
+    - name: Run Django Migrations
+      run: |
+        echo "Running Django migrations"
+        cd /home/Bastian/weight_tracker
+        poetry run python manage.py makemigrations
+        poetry run python manage.py migrate
+
+    - name: Collect Static Files
+      run: |
+        echo "Collecting static files"
+        cd /home/Bastian/weight_tracker
+        poetry run python manage.py collectstatic --noinput
+
+    - name: Restart Gunicorn Service
+      run: |
+        echo "${{ secrets.ADMIN_PASSWORD }}" | sudo -S systemctl restart gunicorn
+      
+    - name: Restart Nginx Service
+      run: |
+        echo "${{ secrets.ADMIN_PASSWORD }}" | sudo -S systemctl restart nginx
+
+    - name: Notify Deployment
+      run: |
+        echo "Sending notification about deployment"
+        # You can add a notification command here, e.g., send an email or post to a Slack channel
+
+    - name: Clean Up
+      run: |
+        echo "Cleaning up temporary files"
+        # Add commands to clean up temporary files or artifacts if needed

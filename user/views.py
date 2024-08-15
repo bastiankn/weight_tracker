@@ -18,7 +18,7 @@ def check_user_not_authenticated(user):
     return not user.is_authenticated
 
 # Login
-@user_passes_test(check_user_not_authenticated, login_url='/', redirect_field_name=None)
+@user_passes_test(check_user_not_authenticated, login_url='/workoutplan', redirect_field_name=None)
 def login_view(request):
     if request.method == 'POST':
         identifier = request.POST['username'] 
@@ -62,7 +62,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, "Activation link is invalid!")
 
-    return redirect('plan')
+    return redirect('workoutplan')
 
 
 # Sending Email   
@@ -84,7 +84,7 @@ def activateEmail(request, user, to_email):
 
 
 # Register
-@user_passes_test(check_user_not_authenticated, login_url='/', redirect_field_name=None)
+@user_passes_test(check_user_not_authenticated, login_url='/workoutplan', redirect_field_name=None)
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -103,4 +103,4 @@ def register_view(request):
 # Logout
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('/workoutplan')

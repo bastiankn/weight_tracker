@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Workout Plan
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Enter Mass Below</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_weight">Weight (kg):</label>
+            {{ form.weight }}
+        </div>
+        <div class="form-group">
+            <label for="id_fat">Body Fat (%):</label>
+            {{ form.fat }}
+        </div>
+        <div class="form-group">
+            <label for="id_tbw">Total Body Water (TBW):</label>
+            {{ form.tbw }}
+        </div>
+        <div class="form-group">
+            <label for="id_bmi">Body Mass Index (BMI):</label>
+            {{ form.bmi }}
+        </div>
+        <div class="form-group">
+            <label for="id_muscle_mass">Muscle Mass (kg):</label>
+            {{ form.muscle_mass }}
+        </div>
+        <div class="form-group">
+            <label for="id_bone_density">Bone Density:</label>
+            {{ form.bone_density }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+{% endblock %}

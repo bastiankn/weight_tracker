@@ -1,8 +1,14 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+class Mass(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,  
+        on_delete=models.CASCADE,  
+        related_name='mass'  
+    )
     weight = models.FloatField(null=True, blank=True)
     fat = models.FloatField(null=True, blank=True)
     tbw = models.FloatField('Total Body Water', null=True, blank=True)

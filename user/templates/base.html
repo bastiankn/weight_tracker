@@ -140,6 +140,13 @@
                                 <i class="fas fa-chart-line"></i> Enter Mass
                             </button>
                         </form>
+                        <!-- Form for Workoutplan Page -->
+                        <form action="{% url 'mass graph' %}" method="get" style="display: inline;">
+                            <button type="submit" class="nav-link text-light" 
+                                    style="background:none; border:none; padding:0; color:inherit; font:inherit; cursor:pointer; outline:none; margin-right: 30px;">
+                                <i class="fas fa-chart-line"></i> Mass Graph
+                            </button>
+                        </form>
                         <!-- Form for Shutdown Action -->
                         {% if user.is_authenticated and user.is_superuser %}
                         <form action="{% url 'shutdown' %}" method="post" style="display: inline;">
@@ -169,7 +176,7 @@
     <section class="welcome-section">
         <div class="container">
             <div data-aos="zoom-out">
-                <div class="fs-1">Welcome to <strong>Tracker</strong>, {{ username }}.</div>
+                <div class="fs-1"><strong>Tracker</strong></div>
                 {% block content %}{% endblock %}
             </div>
         </div>
